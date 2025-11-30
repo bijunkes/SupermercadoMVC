@@ -19,9 +19,36 @@ public class EditarProdutoController {
 
     private void salvarProduto() {
         try {
-            String nome = view.getNome();
-            double preco = Double.parseDouble(view.getPreco());
-            int qtde = Integer.parseInt(view.getQtde());
+
+            String nome = view.getNome().trim();
+            String precoStr = view.getPreco().trim();
+            String qtdeStr = view.getQtde().trim();
+
+            if (nome.isEmpty()) {
+                view.mostrarMensagem("O nome do produto não pode estar vazio.");
+                return;
+            }
+
+            if (precoStr.isEmpty() || qtdeStr.isEmpty()) {
+                view.mostrarMensagem("Preencha todos os campos antes de salvar.");
+                return;
+            }
+
+            double preco;
+            int qtde;
+
+            try {
+                preco = Double.parseDouble(precoStr);
+                qtde = Integer.parseInt(qtdeStr);
+            } catch (NumberFormatException ex) {
+                view.mostrarMensagem("Preço e quantidade devem ser valores numéricos.");
+                return;
+            }
+
+            if (preco < 0 || qtde < 0) {
+                view.mostrarMensagem("Preço e quantidade não podem ser negativos.");
+                return;
+            }
 
             produto.setNome(nome);
             produto.setPreco(preco);
@@ -33,8 +60,9 @@ public class EditarProdutoController {
             } else {
                 view.mostrarMensagem("Erro ao atualizar produto.");
             }
-        } catch (NumberFormatException ex) {
-            view.mostrarMensagem("Preencha os campos corretamente!");
+
+        } catch (Exception ex) {
+            view.mostrarMensagem("Erro inesperado ao salvar: " + ex.getMessage());
         }
     }
 }

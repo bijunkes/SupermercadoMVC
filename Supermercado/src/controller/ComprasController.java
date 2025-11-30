@@ -90,31 +90,48 @@ public class ComprasController {
         try {
             int idProduto = (int) view.getModelo().getValueAt(linha, 0);
             double preco = Double.parseDouble(view.getModelo().getValueAt(linha, 2).toString());
-            int qtde = Integer.parseInt(view.getTfQtde().getText());
-            Usuario usuario = frame.getUsuarioLogado();
+            int estoque = Integer.parseInt(view.getModelo().getValueAt(linha, 3).toString());
 
+            String qtdeTxt = view.getTfQtde().getText().trim();
+            if (qtdeTxt.isEmpty()) {
+                JOptionPane.showMessageDialog(view, "Informe uma quantidade.");
+                return;
+            }
+
+            int qtde = Integer.parseInt(qtdeTxt);
+
+            if (qtde <= 0) {
+                JOptionPane.showMessageDialog(view, "A quantidade deve ser maior que 0.");
+                return;
+            }
+
+            if (qtde > estoque) {
+                JOptionPane.showMessageDialog(view, "Quantidade maior que o estoque disponível.");
+                return;
+            }
+
+            Usuario usuario = frame.getUsuarioLogado();
             if (usuario == null) {
                 JOptionPane.showMessageDialog(view, "Nenhum usuário logado.");
                 return;
             }
 
             boolean sucesso = carrinhoController.adicionarProduto(usuario.getId(), idProduto, qtde, preco);
-            if (sucesso) {
-                JOptionPane.showMessageDialog(view, "Produto adicionado ao carrinho.");
-                
-                atualizarTabela();
-                
-                double totalCompra = carrinhoController.calcularTotalCompra();
-                view.getTfTotalPagar().setText(String.format("%.2f", totalCompra));
-
-                // LIMPAR CAMPOS
-                view.getTfProduto().setText("");
-                view.getTfQtde().setText("");
-                view.getTfTotalPagar().setText("");
-                view.getTable().clearSelection();
-            } else {
+            if (!sucesso) {
                 JOptionPane.showMessageDialog(view, "Erro ao adicionar produto.");
+                return;
             }
+
+            JOptionPane.showMessageDialog(view, "Produto adicionado ao carrinho.");
+
+            atualizarTabela();
+
+            double totalCompra = carrinhoController.calcularTotalCompra();
+            view.getTfTotalPagar().setText(String.format("%.2f", totalCompra));
+
+            view.getTfProduto().setText("");
+            view.getTfQtde().setText("");
+            view.getTable().clearSelection();
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(view, "Quantidade inválida.");

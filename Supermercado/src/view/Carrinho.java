@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import model.Produto;
+import net.miginfocom.swing.MigLayout;
 
 public class Carrinho extends JPanel {
 
@@ -41,23 +42,26 @@ public class Carrinho extends JPanel {
 
         setBackground(corFundo);
         setPreferredSize(new Dimension(900, 600));
-        setLayout(null);
+        setLayout(new MigLayout(
+        	    "fill",
+        	    "50[180][180][180]30[][][][]30",
+        	    "30[40][40][40][50][][][][50][][][][][][50][]50"
+        	));
+
 
         JLabel lblCarrinho = new JLabel("CARRINHO");
 		lblCarrinho.setVerticalAlignment(SwingConstants.TOP);
 		lblCarrinho.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCarrinho.setForeground(new Color(208, 219, 151));
 		lblCarrinho.setFont(new Font("Arial", Font.BOLD, 30));
-		lblCarrinho.setBounds(37, 55, 353, 29);
-		add(lblCarrinho);
+		add(lblCarrinho, "cell 0 0 3 1,grow");
 		
 		JLabel labelDeProdutos = new JLabel("DE PRODUTOS");
 		labelDeProdutos.setVerticalAlignment(SwingConstants.TOP);
 		labelDeProdutos.setHorizontalAlignment(SwingConstants.CENTER);
 		labelDeProdutos.setForeground(new Color(208, 219, 151));
 		labelDeProdutos.setFont(new Font("Arial", Font.BOLD, 30));
-		labelDeProdutos.setBounds(37, 85, 353, 29);
-		add(labelDeProdutos);
+		add(labelDeProdutos, "cell 0 1 3 1,grow");
 		
 		JLabel lblProdutoTabela = new JLabel("PRODUTO");
 		lblProdutoTabela.setOpaque(true);
@@ -65,8 +69,7 @@ public class Carrinho extends JPanel {
 		lblProdutoTabela.setForeground(new Color(37, 77, 50));
 		lblProdutoTabela.setFont(new Font("Arial", Font.BOLD, 18));
 		lblProdutoTabela.setBackground(new Color(208, 219, 151));
-		lblProdutoTabela.setBounds(40, 130, 120, 30);
-		add(lblProdutoTabela);
+		add(lblProdutoTabela, "cell 0 2,grow");
 		
 		JLabel lblPrecoTabela = new JLabel("PREÇO");
 		lblPrecoTabela.setOpaque(true);
@@ -74,8 +77,7 @@ public class Carrinho extends JPanel {
 		lblPrecoTabela.setForeground(new Color(37, 77, 50));
 		lblPrecoTabela.setFont(new Font("Arial", Font.BOLD, 18));
 		lblPrecoTabela.setBackground(new Color(208, 219, 151));
-		lblPrecoTabela.setBounds(154, 130, 120, 30);
-		add(lblPrecoTabela);
+		add(lblPrecoTabela, "cell 1 2,alignx center,grow");
 		
 		JLabel lblQtdeTabela = new JLabel("QTDE");
 		lblQtdeTabela.setOpaque(true);
@@ -83,8 +85,7 @@ public class Carrinho extends JPanel {
 		lblQtdeTabela.setForeground(new Color(37, 77, 50));
 		lblQtdeTabela.setFont(new Font("Arial", Font.BOLD, 18));
 		lblQtdeTabela.setBackground(new Color(208, 219, 151));
-		lblQtdeTabela.setBounds(270, 130, 120, 30);
-		add(lblQtdeTabela);
+		add(lblQtdeTabela, "cell 2 2,grow");
 
 		String[] colunas = {"ID", "Produto", "Preço", "Qtde"};
 		DefaultTableModel modelo = new DefaultTableModel(colunas, 0) {
@@ -101,26 +102,22 @@ public class Carrinho extends JPanel {
         DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
         centralizado.setHorizontalAlignment(SwingConstants.CENTER);
         table.setDefaultRenderer(Object.class, centralizado);
-
-        table.setBounds(40, 160, 350, 410);
         table.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && listener != null) {
                 listener.onLinhaSelecionada(table.getSelectedRow());
             }
         });
-        add(table);
+        add(table, "cell 0 3 3 13,grow");
 
         JLabel lblInfo = new JLabel("INFORMAÇÕES");
         lblInfo.setForeground(verdeClaro);
         lblInfo.setFont(new Font("Arial", Font.BOLD, 22));
-        lblInfo.setBounds(450, 85, 408, 29);
-        add(lblInfo);
+        add(lblInfo, "cell 3 1 3 1,grow");
 
         JLabel lblProduto = new JLabel("PRODUTO");
         lblProduto.setForeground(verdeClaro);
         lblProduto.setFont(new Font("Arial", Font.BOLD, 16));
-        lblProduto.setBounds(450, 130, 408, 29);
-        add(lblProduto);
+        add(lblProduto, "cell 3 2 3 1,grow");
 
         tfProduto = new JTextField();
         tfProduto.setEditable(false);
@@ -128,28 +125,24 @@ public class Carrinho extends JPanel {
         tfProduto.setForeground(corFundo);
         tfProduto.setFont(new Font("Arial", Font.BOLD, 16));
         tfProduto.setBorder(new EmptyBorder(10, 10, 10, 10));
-        tfProduto.setBounds(450, 160, 408, 50);
-        add(tfProduto);
+        add(tfProduto, "cell 3 3 3 1,grow");
 
         JLabel lblQtde = new JLabel("QUANTIDADE");
         lblQtde.setForeground(verdeClaro);
         lblQtde.setFont(new Font("Arial", Font.BOLD, 16));
-        lblQtde.setBounds(450, 220, 408, 29);
-        add(lblQtde);
+        add(lblQtde, "cell 3 5 3 1,grow");
 
         tfQtde = new JTextField();
         tfQtde.setBackground(verdeClaroTransparente);
         tfQtde.setForeground(corFundo);
         tfQtde.setFont(new Font("Arial", Font.BOLD, 16));
         tfQtde.setBorder(new EmptyBorder(10, 10, 10, 10));
-        tfQtde.setBounds(450, 250, 408, 50);
-        add(tfQtde);
+        add(tfQtde, "cell 3 7 3 1,grow");
 
         JLabel lblTotal = new JLabel("TOTAL A PAGAR (R$)");
         lblTotal.setForeground(verdeClaro);
         lblTotal.setFont(new Font("Arial", Font.BOLD, 16));
-        lblTotal.setBounds(450, 400, 408, 29);
-        add(lblTotal);
+        add(lblTotal, "cell 3 11 3 1,grow");
 
         tfTotal = new JTextField();
         tfTotal.setEditable(false);
@@ -157,8 +150,7 @@ public class Carrinho extends JPanel {
         tfTotal.setForeground(corFundo);
         tfTotal.setFont(new Font("Arial", Font.BOLD, 16));
         tfTotal.setBorder(new EmptyBorder(10, 10, 10, 10));
-        tfTotal.setBounds(450, 430, 408, 50);
-        add(tfTotal);
+        add(tfTotal, "cell 3 13 3 1,grow");
 
         btnAtualizar = new JButton("SALVAR");
         btnAtualizar.setOpaque(true);
@@ -166,8 +158,7 @@ public class Carrinho extends JPanel {
         btnAtualizar.setFont(new Font("Arial", Font.BOLD, 20));
         btnAtualizar.setBorderPainted(false);
         btnAtualizar.setBackground(new Color(208, 219, 151));
-        btnAtualizar.setBounds(708, 320, 150, 50);
-        add(btnAtualizar);
+        add(btnAtualizar, "cell 5 9,grow");
 
         btnNotaFiscal = new JButton("NOTA FISCAL");
         btnNotaFiscal.setOpaque(true);
@@ -175,14 +166,12 @@ public class Carrinho extends JPanel {
         btnNotaFiscal.setFont(new Font("Arial", Font.BOLD, 20));
         btnNotaFiscal.setBorderPainted(false);
         btnNotaFiscal.setBackground(new Color(208, 219, 151));
-        btnNotaFiscal.setBounds(450, 520, 180, 50);
-        add(btnNotaFiscal);
+        add(btnNotaFiscal, "cell 3 15,grow");
 
         btnVoltar = new JButton(new ImageIcon(getClass().getResource("/icons/voltar.png")));
-        btnVoltar.setBounds(820, 530, 38, 40);
         btnVoltar.setBackground(corFundo);
         btnVoltar.setBorderPainted(false);
-        add(btnVoltar);
+        add(btnVoltar, "cell 5 15,alignx right,aligny bottom");
         
         btnAtualizar.addActionListener(e -> {
             if (listener != null) {

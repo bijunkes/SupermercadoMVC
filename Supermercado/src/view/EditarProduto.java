@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import model.Produto;
+import net.miginfocom.swing.MigLayout;
 
 public class EditarProduto extends JDialog {
 
@@ -22,57 +23,50 @@ public class EditarProduto extends JDialog {
         getContentPane().setBackground(corFundo);
         setSize(500, 400);
         setLocationRelativeTo(parent);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new MigLayout("", "30[500]30", "30[30][30][40][30][40][30][40]20[40]30"));
 
         JLabel lblEditarProduto = new JLabel("EDITAR PRODUTO");
         lblEditarProduto.setVerticalAlignment(SwingConstants.TOP);
         lblEditarProduto.setHorizontalAlignment(SwingConstants.CENTER);
         lblEditarProduto.setForeground(verdeClaro);
         lblEditarProduto.setFont(new Font("Arial", Font.BOLD, 30));
-        lblEditarProduto.setBounds(100, 35, 300, 29);
-        getContentPane().add(lblEditarProduto);
+        getContentPane().add(lblEditarProduto, "cell 0 0,alignx center,growy");
 
         JLabel lblProduto = new JLabel("PRODUTO");
         lblProduto.setForeground(verdeClaro);
         lblProduto.setFont(new Font("Arial", Font.BOLD, 16));
-        lblProduto.setBounds(75, 70, 220, 29);
-        getContentPane().add(lblProduto);
+        getContentPane().add(lblProduto, "cell 0 1,grow");
 
         textFieldProduto = new JTextField(produto.getNome());
         textFieldProduto.setFont(new Font("Arial", Font.BOLD, 18));
         textFieldProduto.setForeground(corFundo);
         textFieldProduto.setBackground(verdeClaroTransparente);
-        textFieldProduto.setBounds(75, 100, 350, 40);
         textFieldProduto.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-        getContentPane().add(textFieldProduto);
+        getContentPane().add(textFieldProduto, "cell 0 2,grow");
 
         JLabel lblPreco = new JLabel("PREÇO (R$)");
         lblPreco.setForeground(verdeClaro);
         lblPreco.setFont(new Font("Arial", Font.BOLD, 16));
-        lblPreco.setBounds(75, 140, 220, 29);
-        getContentPane().add(lblPreco);
+        getContentPane().add(lblPreco, "cell 0 3,alignx left,growy");
 
         textFieldPreco = new JTextField(String.valueOf(produto.getPreco()));
         textFieldPreco.setFont(new Font("Arial", Font.BOLD, 18));
         textFieldPreco.setForeground(corFundo);
         textFieldPreco.setBackground(verdeClaroTransparente);
-        textFieldPreco.setBounds(75, 170, 350, 40);
         textFieldPreco.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-        getContentPane().add(textFieldPreco);
+        getContentPane().add(textFieldPreco, "cell 0 4,grow");
 
         JLabel lblQtde = new JLabel("QUANTIDADE");
         lblQtde.setForeground(verdeClaro);
         lblQtde.setFont(new Font("Arial", Font.BOLD, 16));
-        lblQtde.setBounds(75, 210, 220, 29);
-        getContentPane().add(lblQtde);
+        getContentPane().add(lblQtde, "cell 0 5,alignx left,growy");
 
         textFieldQtde = new JTextField(String.valueOf(produto.getQtde()));
         textFieldQtde.setFont(new Font("Arial", Font.BOLD, 18));
         textFieldQtde.setForeground(corFundo);
         textFieldQtde.setBackground(verdeClaroTransparente);
-        textFieldQtde.setBounds(75, 240, 350, 40);
         textFieldQtde.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-        getContentPane().add(textFieldQtde);
+        getContentPane().add(textFieldQtde, "cell 0 6,grow");
 
         buttonSalvar = new JButton("SALVAR");
         buttonSalvar.setOpaque(true);
@@ -80,8 +74,7 @@ public class EditarProduto extends JDialog {
         buttonSalvar.setFont(new Font("Arial", Font.BOLD, 18));
         buttonSalvar.setBorderPainted(false);
         buttonSalvar.setBackground(verdeClaro);
-        buttonSalvar.setBounds(173, 300, 150, 40);
-        getContentPane().add(buttonSalvar);
+        getContentPane().add(buttonSalvar, "cell 0 7,alignx center,growy");
     }
 
     public String getNome() { return textFieldProduto.getText().trim(); }

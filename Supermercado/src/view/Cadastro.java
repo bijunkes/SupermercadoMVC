@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import controller.Frame;
+import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionEvent;
 
 public class Cadastro extends JPanel {
 
@@ -27,70 +29,76 @@ public class Cadastro extends JPanel {
 
         setBackground(corFundo);
         setPreferredSize(new Dimension(900, 600));
-        setLayout(null);
+        setLayout(new MigLayout("fill, insets 0, wrap 1", "[200]", "30[][][20][][20][][30][][]"));
+
 
         JLabel labelCadastro = new JLabel("CADASTRO");
-        labelCadastro.setBounds(276, 94, 344, 47);
+        labelCadastro.setVerticalAlignment(SwingConstants.BOTTOM);
         labelCadastro.setForeground(verdeClaro);
         labelCadastro.setFont(new Font("Arial", Font.BOLD, 40));
         labelCadastro.setHorizontalAlignment(SwingConstants.CENTER);
-        add(labelCadastro);
-
-        JLabel lblNome = new JLabel("NOME");
-        lblNome.setForeground(verdeClaro);
-        lblNome.setFont(new Font("Arial", Font.BOLD, 16));
-        lblNome.setBounds(200, 165, 59, 26);
-        add(lblNome);
+        add(labelCadastro, "cell 2 0,growx,aligny bottom");
+        
+                JLabel lblNome = new JLabel("NOME");
+                lblNome.setVerticalAlignment(SwingConstants.BOTTOM);
+                lblNome.setForeground(verdeClaro);
+                lblNome.setFont(new Font("Arial", Font.BOLD, 16));
+                add(lblNome, "cell 1 1,grow");
 
         textFieldNome = new JTextField();
         textFieldNome.setBorder(new EmptyBorder(10, 10, 10, 10));
         textFieldNome.setForeground(corFundo);
         textFieldNome.setFont(new Font("Arial", Font.BOLD, 16));
         textFieldNome.setBackground(verdeClaroTransparente);
-        textFieldNome.setBounds(200, 194, 500, 50);
-        add(textFieldNome);
-
-        JLabel lblCpf = new JLabel("CPF");
-        lblCpf.setForeground(verdeClaro);
-        lblCpf.setFont(new Font("Arial", Font.BOLD, 16));
-        lblCpf.setBounds(200, 245, 59, 26);
-        add(lblCpf);
+        add(textFieldNome, "cell 1 2 3 1,grow");
 
         try {
             MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
+            
+                    JLabel lblCpf = new JLabel("CPF");
+                    lblCpf.setVerticalAlignment(SwingConstants.BOTTOM);
+                    lblCpf.setForeground(verdeClaro);
+                    lblCpf.setFont(new Font("Arial", Font.BOLD, 16));
+                    add(lblCpf, "cell 1 3,grow");
             textFieldCpf = new JFormattedTextField(cpfMask);
             textFieldCpf.setBorder(new EmptyBorder(10, 10, 10, 10));
             textFieldCpf.setForeground(corFundo);
             textFieldCpf.setFont(new Font("Arial", Font.BOLD, 16));
             textFieldCpf.setBackground(verdeClaroTransparente);
-            textFieldCpf.setBounds(200, 274, 500, 50);
-            add(textFieldCpf);
+            add(textFieldCpf, "cell 1 4 3 1,grow");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        radioButtonAdm = new JRadioButton("ADMINISTRADOR");
-        radioButtonAdm.setBackground(verdeClaroTransparente);
-        radioButtonAdm.setForeground(corFundo);
-        radioButtonAdm.setFont(new Font("Arial", Font.BOLD, 16));
-        radioButtonAdm.setBounds(200, 356, 500, 50);
-        add(radioButtonAdm);
-
-        buttonCadastrar = new JButton("CADASTRAR");
-        buttonCadastrar.setFont(new Font("Arial", Font.BOLD, 20));
-        buttonCadastrar.setBounds(350, 454, 200, 50);
-        buttonCadastrar.setBackground(verdeClaro);
-        buttonCadastrar.setForeground(corFundo);
-        buttonCadastrar.setBorderPainted(false);
-        add(buttonCadastrar);
+        
+        JLabel lblVazio = new JLabel(" ");
+        lblVazio.setForeground(verdeClaro);
+        lblVazio.setFont(new Font("Arial", Font.BOLD, 16));
+        add(lblVazio, "cell 1 5,grow");
 
         ImageIcon icon = new ImageIcon(getClass().getResource("/icons/voltar.png"));
+                
+                        radioButtonAdm = new JRadioButton("ADMINISTRADOR");
+                        radioButtonAdm.setBackground(verdeClaroTransparente);
+                        radioButtonAdm.setForeground(corFundo);
+                        radioButtonAdm.setFont(new Font("Arial", Font.BOLD, 16));
+                        add(radioButtonAdm, "cell 1 6 3 1,grow");
+                        
         JButton buttonVoltar = new JButton(icon);
-        buttonVoltar.setBounds(820, 530, 38, 40);
         buttonVoltar.setBackground(corFundo);
         buttonVoltar.setBorderPainted(false);
         buttonVoltar.addActionListener(e -> frame.mostrarInicio());
-        add(buttonVoltar);
+        
+                buttonCadastrar = new JButton("CADASTRAR");
+                buttonCadastrar.addActionListener(new ActionListener() {
+                	public void actionPerformed(ActionEvent e) {
+                	}
+                });
+                buttonCadastrar.setFont(new Font("Arial", Font.BOLD, 20));
+                buttonCadastrar.setBackground(verdeClaro);
+                buttonCadastrar.setForeground(corFundo);
+                buttonCadastrar.setBorderPainted(false);
+                add(buttonCadastrar, "cell 2 8,alignx center,grow");
+        add(buttonVoltar, "cell 4 8,grow");
     }
 
     public String getNome() {

@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.List;
 import model.Carrinho;
 import model.Usuario;
+import net.miginfocom.swing.MigLayout;
 
 public class NotaFiscal extends JDialog {
 
@@ -22,43 +23,38 @@ public class NotaFiscal extends JDialog {
         getContentPane().setBackground(corFundo);
         setSize(500, 600);
         setLocationRelativeTo(parent);
-        getContentPane().setLayout(null);
+        getContentPane().setLayout(new MigLayout("", "30[grow][grow][grow]30", "30[29px][29px][40px][29px][40px][30px][190px][29px][40px]30"));
 
         JLabel lblNotaFiscal = new JLabel("NOTA FISCAL", SwingConstants.CENTER);
         lblNotaFiscal.setForeground(verdeClaro);
         lblNotaFiscal.setFont(new Font("Arial", Font.BOLD, 30));
-        lblNotaFiscal.setBounds(100, 35, 300, 29);
-        getContentPane().add(lblNotaFiscal);
+        getContentPane().add(lblNotaFiscal, "cell 0 0 3 1,grow");
 
         JLabel lblNome = new JLabel("NOME");
         lblNome.setForeground(verdeClaro);
         lblNome.setFont(new Font("Arial", Font.BOLD, 16));
-        lblNome.setBounds(75, 70, 220, 29);
-        getContentPane().add(lblNome);
+        getContentPane().add(lblNome, "cell 0 1,grow");
 
         textFieldNome = new JTextField();
         textFieldNome.setEditable(false);
-        textFieldNome.setBounds(75, 100, 350, 40);
         textFieldNome.setFont(new Font("Arial", Font.BOLD, 18));
         textFieldNome.setBackground(verdeClaroTransparente);
         textFieldNome.setForeground(corFundo);
         textFieldNome.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-        getContentPane().add(textFieldNome);
+        getContentPane().add(textFieldNome, "cell 0 2 3 1,grow");
 
         JLabel lblCPF = new JLabel("CPF");
         lblCPF.setForeground(verdeClaro);
         lblCPF.setFont(new Font("Arial", Font.BOLD, 16));
-        lblCPF.setBounds(75, 140, 220, 29);
-        getContentPane().add(lblCPF);
+        getContentPane().add(lblCPF, "cell 0 3,grow");
 
         textFieldCPF = new JTextField();
         textFieldCPF.setEditable(false);
-        textFieldCPF.setBounds(75, 170, 350, 40);
         textFieldCPF.setFont(new Font("Arial", Font.BOLD, 18));
         textFieldCPF.setBackground(verdeClaroTransparente);
         textFieldCPF.setForeground(corFundo);
         textFieldCPF.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-        getContentPane().add(textFieldCPF);
+        getContentPane().add(textFieldCPF, "cell 0 4 3 1,grow");
 
         JLabel lblProdutoTabela = new JLabel("PRODUTO");
 		lblProdutoTabela.setOpaque(true);
@@ -66,17 +62,7 @@ public class NotaFiscal extends JDialog {
 		lblProdutoTabela.setForeground(new Color(37, 77, 50));
 		lblProdutoTabela.setFont(new Font("Arial", Font.BOLD, 18));
 		lblProdutoTabela.setBackground(new Color(208, 219, 151));
-		lblProdutoTabela.setBounds(75, 240, 120, 30);
-		getContentPane().add(lblProdutoTabela);
-        
-        JLabel lblQtdeTabela = new JLabel("QTDE");
-        lblQtdeTabela.setOpaque(true);
-        lblQtdeTabela.setHorizontalAlignment(SwingConstants.CENTER);
-        lblQtdeTabela.setForeground(new Color(37, 77, 50));
-        lblQtdeTabela.setFont(new Font("Arial", Font.BOLD, 18));
-        lblQtdeTabela.setBackground(new Color(208, 219, 151));
-        lblQtdeTabela.setBounds(305, 240, 120, 30);
-        getContentPane().add(lblQtdeTabela);
+		getContentPane().add(lblProdutoTabela, "cell 0 5,alignx left,grow");
         
         JLabel lblPrecoTabela = new JLabel("PREÇO");
         lblPrecoTabela.setOpaque(true);
@@ -84,33 +70,37 @@ public class NotaFiscal extends JDialog {
         lblPrecoTabela.setForeground(new Color(37, 77, 50));
         lblPrecoTabela.setFont(new Font("Arial", Font.BOLD, 18));
         lblPrecoTabela.setBackground(new Color(208, 219, 151));
-        lblPrecoTabela.setBounds(190, 240, 120, 30);
-        getContentPane().add(lblPrecoTabela);
+        getContentPane().add(lblPrecoTabela, "cell 1 5,alignx center,grow");
+        
+        JLabel lblQtdeTabela = new JLabel("QTDE");
+        lblQtdeTabela.setOpaque(true);
+        lblQtdeTabela.setHorizontalAlignment(SwingConstants.CENTER);
+        lblQtdeTabela.setForeground(new Color(37, 77, 50));
+        lblQtdeTabela.setFont(new Font("Arial", Font.BOLD, 18));
+        lblQtdeTabela.setBackground(new Color(208, 219, 151));
+        getContentPane().add(lblQtdeTabela, "cell 2 5,grow");
         
         table = new JTable();
         table.setRowHeight(30);
         table.setForeground(new Color(37, 77, 50));
 		table.setFont(new Font("Arial", Font.BOLD, 18));
 		table.setBackground(new Color(122, 148, 101));
-        table.setBounds(75, 270, 350, 190);
-        getContentPane().add(table);
+        getContentPane().add(table, "cell 0 6 3 1,grow");
         
         JLabel lblTotal = new JLabel("TOTAL (R$)");
         lblTotal.setVerticalAlignment(SwingConstants.BOTTOM);
         lblTotal.setHorizontalAlignment(SwingConstants.LEFT);
         lblTotal.setForeground(new Color(208, 219, 151));
         lblTotal.setFont(new Font("Arial", Font.BOLD, 16));
-        lblTotal.setBounds(75, 460, 220, 29);
-        getContentPane().add(lblTotal);
+        getContentPane().add(lblTotal, "cell 0 7,grow");
 
         textFieldTotal = new JTextField();
         textFieldTotal.setEditable(false);
-        textFieldTotal.setBounds(75, 490, 350, 40);
         textFieldTotal.setFont(new Font("Arial", Font.BOLD, 18));
         textFieldTotal.setBackground(verdeClaroTransparente);
         textFieldTotal.setForeground(corFundo);
         textFieldTotal.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-        getContentPane().add(textFieldTotal);
+        getContentPane().add(textFieldTotal, "cell 0 8 3 1,grow");
 
         setModal(true);
     }

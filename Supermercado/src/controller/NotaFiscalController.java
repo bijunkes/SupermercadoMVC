@@ -5,6 +5,7 @@ import model.Usuario;
 import model.Carrinho;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class NotaFiscalController {
 
@@ -15,7 +16,31 @@ public class NotaFiscalController {
     }
 
     public void emitirNota(Usuario usuario, List<Carrinho> produtos) {
-        NotaFiscal nota = new NotaFiscal(frame);
-        nota.mostrarNota(usuario, produtos);
+        try {
+
+            if (usuario == null) {
+                JOptionPane.showMessageDialog(frame, "Erro: nenhum usuário informado.");
+                return;
+            }
+
+            if (produtos == null) {
+                JOptionPane.showMessageDialog(frame, "Erro: lista de produtos nula.");
+                return;
+            }
+
+            if (produtos.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Não há produtos no carrinho para emitir a nota fiscal.");
+                return;
+            }
+
+            NotaFiscal nota = new NotaFiscal(frame);
+            nota.mostrarNota(usuario, produtos);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
+                frame,
+                "Ocorreu um erro inesperado ao emitir a nota fiscal. \nDetalhes: " + ex.getMessage()
+            );
+        }
     }
 }

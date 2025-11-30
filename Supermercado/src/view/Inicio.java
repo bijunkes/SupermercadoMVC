@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.Font;
+import net.miginfocom.swing.MigLayout;
 
 public class Inicio extends JPanel {
 
@@ -18,41 +19,39 @@ public class Inicio extends JPanel {
         
         setBackground(corFundo);
         setPreferredSize(new Dimension(900, 600));
-        setLayout(null);
+        setLayout(new MigLayout("fill, insets 0", "50[grow][grow][grow]", "30[][40][][]50[20][][]20"));
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logout.png"));
         
         JLabel labelSupermercado = new JLabel("SUPERMERCADO");
-        labelSupermercado.setBounds(284, 150, 344, 47);
+        labelSupermercado.setVerticalAlignment(SwingConstants.BOTTOM);
         labelSupermercado.setForeground(verdeClaro);
         labelSupermercado.setFont(new Font("Arial", Font.BOLD, 40));
         labelSupermercado.setHorizontalAlignment(SwingConstants.CENTER);
-        add(labelSupermercado);
+        add(labelSupermercado, "cell 1 1,alignx center,aligny center");
         
         buttonCadastrar = new JButton("CADASTRAR");
         buttonCadastrar.setFont(new Font("Arial", Font.BOLD, 20));
-        buttonCadastrar.setBounds(250, 300, 400, 50);
         buttonCadastrar.setBackground(verdeClaro);
         buttonCadastrar.setForeground(corFundo); 
         buttonCadastrar.setOpaque(true);
         buttonCadastrar.setBorderPainted(false);
-        add(buttonCadastrar);
+        add(buttonCadastrar, "cell 1 3,grow");
         
         buttonEntrar = new JButton("ENTRAR");
         buttonEntrar.setFont(new Font("Arial", Font.BOLD, 20));
-        buttonEntrar.setBounds(250, 400, 400, 50);
         buttonEntrar.setBackground(verdeClaro);
         buttonEntrar.setForeground(corFundo); 
         buttonEntrar.setOpaque(true);
         buttonEntrar.setBorderPainted(false);
-        add(buttonEntrar);
-        
-        ImageIcon icon = new ImageIcon(getClass().getResource("/icons/logout.png"));
+        add(buttonEntrar, "cell 1 4,grow");
         buttonLogout = new JButton(icon);
-        buttonLogout.setBounds(820, 530, 38, 40);
+        buttonLogout.setVerticalAlignment(SwingConstants.BOTTOM);
         buttonLogout.setBackground(corFundo);
         buttonLogout.setForeground(verdeClaro);
         buttonLogout.setOpaque(true);
         buttonLogout.setBorderPainted(false);
-        add(buttonLogout);
+        add(buttonLogout, "cell 2 5,grow");
     }
 
     public void adicionarAcaoCadastrar(java.awt.event.ActionListener listener) {
