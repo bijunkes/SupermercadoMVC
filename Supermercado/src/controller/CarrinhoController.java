@@ -227,7 +227,7 @@ public class CarrinhoController {
             preco
         );
 
-        return carrinhoDAO.adicionarProduto(c);
-    }
+		return carrinhoDAO.adicionarProduto(c);
+	}
 
 }

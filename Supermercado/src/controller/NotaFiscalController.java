@@ -9,38 +9,36 @@ import javax.swing.JOptionPane;
 
 public class NotaFiscalController {
 
-    private JFrame frame;
+	private JFrame frame;
 
-    public NotaFiscalController(JFrame frame) {
-        this.frame = frame;
-    }
+	public NotaFiscalController(JFrame frame) {
+		this.frame = frame;
+	}
 
-    public void emitirNota(Usuario usuario, List<Carrinho> produtos) {
-        try {
+	public void emitirNota(Usuario usuario, List<Carrinho> produtos) {
+		try {
 
-            if (usuario == null) {
-                JOptionPane.showMessageDialog(frame, "Erro: nenhum usuário informado.");
-                return;
-            }
+			if (usuario == null) {
+				JOptionPane.showMessageDialog(frame, "Erro: nenhum usuário informado.");
+				return;
+			}
 
-            if (produtos == null) {
-                JOptionPane.showMessageDialog(frame, "Erro: lista de produtos nula.");
-                return;
-            }
+			if (produtos == null) {
+				JOptionPane.showMessageDialog(frame, "Erro: lista de produtos nula.");
+				return;
+			}
 
-            if (produtos.isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "Não há produtos no carrinho para emitir a nota fiscal.");
-                return;
-            }
+			if (produtos.isEmpty()) {
+				JOptionPane.showMessageDialog(frame, "Não há produtos no carrinho para emitir a nota fiscal.");
+				return;
+			}
 
-            NotaFiscal nota = new NotaFiscal(frame);
-            nota.mostrarNota(usuario, produtos);
+			NotaFiscal nota = new NotaFiscal(frame);
+			nota.mostrarNota(usuario, produtos);
 
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(
-                frame,
-                "Ocorreu um erro inesperado ao emitir a nota fiscal. \nDetalhes: " + ex.getMessage()
-            );
-        }
-    }
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(frame,
+					"Ocorreu um erro inesperado ao emitir a nota fiscal. \nDetalhes: " + ex.getMessage());
+		}
+	}
 }
