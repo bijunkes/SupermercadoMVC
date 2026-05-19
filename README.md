@@ -64,20 +64,20 @@ Tabelas principais:
 ### Tela Inicial
 ![Tela Inicial](./images/Inicial.png)
 
-### Login
-![Login](./images/Login.png)
+### Catálogo
+![Catalogo](./images/Catalogo.png)
 
 ### Cadastro de Produtos
-![Produtos](./images/CadastroProdutos.png)
+![CadastroProdutos](./images/CadastroProdutos.png)
 
 ### Edição de Produtos
-![Produtos](./images/EdicaoProdutos.png)
+![EdicaoProdutos](./images/EdicaoProdutos.png)
 
-### Carrinho de Compras
+### Carrinho
 ![Carrinho](./images/Carrinho.png)
 
 ### Emissão de Nota Fiscal
-![Produtos](./images/NotaFiscal.png)
+![NotaFiscal](./images/NotaFiscal.png)
 
 ---
 
