@@ -25,8 +25,6 @@ Interface gráfica construída com Java Swing, utilizando MigLayout para organiz
 - Login de usuários e administradores
 - Persistência de dados em banco SQL  
 
----
-
 ## Tecnologias Utilizadas
 
 - Java (POO)  
@@ -35,8 +33,6 @@ Interface gráfica construída com Java Swing, utilizando MigLayout para organiz
 - SQL (Banco de dados relacional)  
 - Arquitetura MVC  
 
----
-
 ## Arquitetura MVC
 
 O projeto segue o padrão MVC, dividido em:
@@ -44,8 +40,6 @@ O projeto segue o padrão MVC, dividido em:
 - Model: Responsável pelas entidades e regras de negócio (Produto, Cliente, Venda etc.)
 - View: Telas do sistema desenvolvidas com Java Swing
 - Controller: Intermedia a comunicação entre Model e View
-
----
 
 ## Banco de Dados
 
@@ -56,8 +50,6 @@ Tabelas principais:
 - usuarios  
 - produtos  
 - carrinho  
-
----
 
 ## Interface do Sistema
 
